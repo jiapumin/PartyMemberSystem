@@ -18,26 +18,38 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //解析csv
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"新党员基本信息11" ofType:@"csv"];
-//    NSString *contents = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-//    NSArray *contentsArray = [contents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-//    NSInteger idx;
-//    for (idx = 0; idx < contentsArray.count; idx++) {
-//        NSString* currentContent = [contentsArray objectAtIndex:idx];
-//        NSArray* dataArr = [currentContent componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@";"]];
-//        NSMutableArray *alldata = [NSMutableArray arrayWithArray:dataArr];
-//        
-//        [alldata addObject:[NSString stringWithFormat:@"%d",idx]];
-//        [alldata addObject:[NSString stringWithFormat:@"%d",idx]];
-//        [alldata addObject:[NSString stringWithFormat:@"%d",idx]];
-//        
-//        [BNManagerDataVo CreatePartyInfoWithArray:alldata];
-//    }
-//    [BNManagerDataVo SavePartyInfo];
-//    
-//    NSArray *alldata = [BNManagerDataVo SelectAllData];
-//    NSLog(@"%@",alldata);
+    
+    NSString *loadData = @"loadData";
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    BOOL isLoadData = [userDefaults boolForKey:loadData];
+    
+    if (!isLoadData) {
+        //解析csv
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"新党员基本信息11" ofType:@"csv"];
+        NSString *contents = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+        NSArray *contentsArray = [contents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        NSInteger idx;
+        for (idx = 0; idx < contentsArray.count; idx++) {
+            if (idx == 0) continue; //字段名称不放到数据库中
+            NSString* currentContent = [contentsArray objectAtIndex:idx];
+            NSArray* dataArr = [currentContent componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@";"]];
+            NSMutableArray *alldata = [NSMutableArray arrayWithArray:dataArr];
+            
+            [alldata addObject:[NSString stringWithFormat:@"%d",idx]];
+            [alldata addObject:[NSString stringWithFormat:@"%d",idx]];
+            [alldata addObject:[NSString stringWithFormat:@"%d",idx]];
+            
+            [BNManagerDataVo CreatePartyInfoWithArray:alldata];
+        }
+        [BNManagerDataVo SavePartyInfo];
+        [userDefaults setBool:YES forKey:loadData];
+        [userDefaults synchronize];
+    }
+    
+    
+
 
     return YES;
 }

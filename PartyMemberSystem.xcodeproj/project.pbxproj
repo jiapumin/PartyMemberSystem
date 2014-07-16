@@ -42,7 +42,10 @@
 		D877A05F1973C4C7003F29C3 /* UIImage+Fit.m in Sources */ = {isa = PBXBuildFile; fileRef = D877A05E1973C4C7003F29C3 /* UIImage+Fit.m */; };
 		D877A0651973CAFB003F29C3 /* BNSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D877A0641973CAFB003F29C3 /* BNSearchViewController.m */; };
 		D877A0681973CB07003F29C3 /* BNMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D877A0671973CB07003F29C3 /* BNMapViewController.m */; };
-		D877A06B1973CB17003F29C3 /* BNPartyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D877A06A1973CB17003F29C3 /* BNPartyListViewController.m */; };
+		D884A3E81975FFCD00E1CF7A /* BNPartyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D884A3E71975FFCD00E1CF7A /* BNPartyListViewController.m */; };
+		D8FD12571976080500F641DD /* BNPartyListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FD12561976080500F641DD /* BNPartyListViewCell.m */; };
+		D8FD125A19761AA700F641DD /* BNPartyDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FD125919761AA700F641DD /* BNPartyDetailController.m */; };
+		D8FD125D19763F3A00F641DD /* BNPartyDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FD125C19763F3A00F641DD /* BNPartyDetailViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +78,7 @@
 		D877A00A19737587003F29C3 /* BNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNViewController.m; sourceTree = "<group>"; };
 		D877A00C19737587003F29C3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D877A028197376FB003F29C3 /* 新党员基本信息11.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "新党员基本信息11.csv"; sourceTree = "<group>"; };
-		D877A02F19737A1F003F29C3 /* 字段描述信息.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "字段描述信息.h"; sourceTree = "<group>"; };
+		D877A02F19737A1F003F29C3 /* 字段描述信息.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "字段描述信息.h"; path = "../字段描述信息.h"; sourceTree = "<group>"; };
 		D877A03519737D6A003F29C3 /* BNManagerDataVo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNManagerDataVo.h; sourceTree = "<group>"; };
 		D877A03619737D6A003F29C3 /* BNManagerDataVo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNManagerDataVo.m; sourceTree = "<group>"; };
 		D877A03919738FB2003F29C3 /* PartyMemberSystemForiPad 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PartyMemberSystemForiPad 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -103,8 +106,14 @@
 		D877A0641973CAFB003F29C3 /* BNSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNSearchViewController.m; sourceTree = "<group>"; };
 		D877A0661973CB07003F29C3 /* BNMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNMapViewController.h; sourceTree = "<group>"; };
 		D877A0671973CB07003F29C3 /* BNMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNMapViewController.m; sourceTree = "<group>"; };
-		D877A0691973CB17003F29C3 /* BNPartyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNPartyListViewController.h; sourceTree = "<group>"; };
-		D877A06A1973CB17003F29C3 /* BNPartyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNPartyListViewController.m; sourceTree = "<group>"; };
+		D884A3E61975FFCD00E1CF7A /* BNPartyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNPartyListViewController.h; sourceTree = "<group>"; };
+		D884A3E71975FFCD00E1CF7A /* BNPartyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNPartyListViewController.m; sourceTree = "<group>"; };
+		D8FD12551976080500F641DD /* BNPartyListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNPartyListViewCell.h; sourceTree = "<group>"; };
+		D8FD12561976080500F641DD /* BNPartyListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNPartyListViewCell.m; sourceTree = "<group>"; };
+		D8FD125819761AA700F641DD /* BNPartyDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNPartyDetailController.h; sourceTree = "<group>"; };
+		D8FD125919761AA700F641DD /* BNPartyDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNPartyDetailController.m; sourceTree = "<group>"; };
+		D8FD125B19763F3A00F641DD /* BNPartyDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNPartyDetailViewCell.h; sourceTree = "<group>"; };
+		D8FD125C19763F3A00F641DD /* BNPartyDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNPartyDetailViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,7 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				D877A03019737CD5003F29C3 /* Data */,
-				D877A02F19737A1F003F29C3 /* 字段描述信息.h */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -254,6 +262,7 @@
 				D877A03619737D6A003F29C3 /* BNManagerDataVo.m */,
 				D877A03F197391D5003F29C3 /* PartyInfo.h */,
 				D877A040197391D5003F29C3 /* PartyInfo.m */,
+				D877A02F19737A1F003F29C3 /* 字段描述信息.h */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -307,8 +316,14 @@
 		D877A0611973C979003F29C3 /* partyList */ = {
 			isa = PBXGroup;
 			children = (
-				D877A0691973CB17003F29C3 /* BNPartyListViewController.h */,
-				D877A06A1973CB17003F29C3 /* BNPartyListViewController.m */,
+				D884A3E61975FFCD00E1CF7A /* BNPartyListViewController.h */,
+				D884A3E71975FFCD00E1CF7A /* BNPartyListViewController.m */,
+				D8FD12551976080500F641DD /* BNPartyListViewCell.h */,
+				D8FD12561976080500F641DD /* BNPartyListViewCell.m */,
+				D8FD125819761AA700F641DD /* BNPartyDetailController.h */,
+				D8FD125919761AA700F641DD /* BNPartyDetailController.m */,
+				D8FD125B19763F3A00F641DD /* BNPartyDetailViewCell.h */,
+				D8FD125C19763F3A00F641DD /* BNPartyDetailViewCell.m */,
 			);
 			path = partyList;
 			sourceTree = "<group>";
@@ -419,12 +434,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D877A05F1973C4C7003F29C3 /* UIImage+Fit.m in Sources */,
+				D884A3E81975FFCD00E1CF7A /* BNPartyListViewController.m in Sources */,
+				D8FD12571976080500F641DD /* BNPartyListViewCell.m in Sources */,
 				D877A0521973C449003F29C3 /* IconView.m in Sources */,
+				D8FD125D19763F3A00F641DD /* BNPartyDetailViewCell.m in Sources */,
 				D877A05B1973C48C003F29C3 /* ComposeView.m in Sources */,
+				D8FD125A19761AA700F641DD /* BNPartyDetailController.m in Sources */,
 				D877A0681973CB07003F29C3 /* BNMapViewController.m in Sources */,
 				D877A03719737D6A003F29C3 /* BNManagerDataVo.m in Sources */,
 				D8779FD019737568003F29C3 /* PartyMemberSystemForiPad.xcdatamodeld in Sources */,
-				D877A06B1973CB17003F29C3 /* BNPartyListViewController.m in Sources */,
 				D877A04F1973C42C003F29C3 /* DockItem.m in Sources */,
 				D877A041197391D5003F29C3 /* PartyInfo.m in Sources */,
 				D877A0651973CAFB003F29C3 /* BNSearchViewController.m in Sources */,
@@ -642,6 +660,7 @@
 				D8779FEE19737569003F29C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D877A02019737588003F29C3 /* Build configuration list for PBXNativeTarget "PartyMemberSystemForiPhone" */ = {
 			isa = XCConfigurationList;
@@ -650,6 +669,7 @@
 				D877A02219737588003F29C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

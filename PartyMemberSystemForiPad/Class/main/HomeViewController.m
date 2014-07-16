@@ -74,7 +74,17 @@
     UINavigationController *nav = _allChilds[item.className];
     if (nav == nil) {
         Class c = NSClassFromString(item.className);
-        UIViewController *vc = [[c alloc] init];
+        UIViewController *vc;
+        if ([item.className isEqualToString:@"BNPartyListViewController"]) {
+            UIStoryboard *story = [UIStoryboard  storyboardWithName:@"Main" bundle:nil];
+            
+             vc = [story instantiateViewControllerWithIdentifier:@"BNPartyListViewController"];
+            
+        }else{
+             vc = [[c alloc] init];
+        }
+        
+       
         nav = [[UINavigationController alloc] initWithRootViewController:vc];
         // 不要自动伸缩
         nav.view.autoresizingMask = UIViewAutoresizingNone;

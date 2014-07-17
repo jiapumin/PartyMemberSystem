@@ -9,8 +9,9 @@
 #import "HomeViewController.h"
 #import "Dock.h"
 #import "DockItem.h"
+#import "THPinViewController.h"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<THPinViewControllerDelegate>
 {
     Dock *_dock;
     
@@ -19,10 +20,20 @@
     
     // 当前正在显示的子控制器
     UINavigationController *_currentChild;
+    
+    
 }
+
+
+@property (nonatomic, strong) UIImageView *secretContentView;
+@property (nonatomic, strong) UIButton *loginLogoutButton;
+@property (nonatomic, copy) NSString *correctPin;
+@property (nonatomic, assign) NSUInteger remainingPinEntries;
+@property (nonatomic, assign) BOOL locked;
 @end
 
 @implementation HomeViewController
+static const NSUInteger THNumberOfPinEntries = 6;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -43,15 +54,29 @@
     self.view.backgroundColor = kGlobalBg;
     
     // 3.监听通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:@"logout" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:@"logout" object:nil];
     
     // 4.默认选中全部状态
     [home selectChildWithItem:[DockItem itemWithIcon:nil className:@"ProfileViewController"]];
-}
-
-- (void)logout
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    //密码部分
+    self.correctPin = @"1111";
+    
+//    self.secretContentView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"confidential"]];
+//    self.secretContentView.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.secretContentView.contentMode = UIViewContentModeScaleAspectFit;
+//    [self.view addSubview:self.secretContentView];
+//    
+//    NSDictionary *views = @{ @"secretContentView" : self.secretContentView };
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20)-[secretContentView]-(20)-|"
+//                                                                      options:0 metrics:nil views:views]];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(120)-[secretContentView]-(20)-|"
+//                                                                      options:0 metrics:nil views:views]];
+    self.locked = YES;
+    
+    NSTimer *time = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(login:) userInfo:nil repeats:NO];
+//    time = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:0.1 target:self selector:@selector(login:) userInfo:nil repeats:NO];
+//    [time fire];
 }
 
 #pragma mark 即将旋转屏幕的时候自动调用
@@ -66,7 +91,9 @@
         _currentChild.view.frame = CGRectMake(_dock.frame.size.width, 0, width, _dock.frame.size.height);
     }];
 }
-
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
 #pragma mark 切换控制器
 - (void)selectChildWithItem:(DockItem *)item
 {
@@ -131,9 +158,109 @@
     }
 }
 
-- (void)dealloc
+
+#pragma mark - Properties
+
+- (void)setLocked:(BOOL)locked
 {
-    // 移除通知的监听器
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"logout" object:nil];
+    _locked = locked;
+    
+    if (self.locked) {
+        self.remainingPinEntries = THNumberOfPinEntries;
+//        self.secretContentView.hidden = YES;
+    } else {
+//        self.secretContentView.hidden = NO;
+    }
 }
+
+#pragma mark - UI
+
+- (void)showPinViewAnimated:(BOOL)animated
+{
+    THPinViewController *pinViewController = [[THPinViewController alloc] initWithDelegate:self];
+    pinViewController.promptTitle = @"Enter PIN";
+    UIColor *darkBlueColor = [UIColor colorWithRed:0.012f green:0.071f blue:0.365f alpha:1.0f];
+    pinViewController.promptColor = darkBlueColor;
+    pinViewController.view.tintColor = darkBlueColor;
+    
+    // for a solid background color, use this:
+    pinViewController.backgroundColor = [UIColor whiteColor];
+    
+    // for a translucent background, use this:
+    self.view.tag = THPinViewControllerContentViewTag;
+    self.modalPresentationStyle = UIModalPresentationCurrentContext;
+    pinViewController.translucentBackground = YES;
+    
+    
+    //    [self.view addSubview:pinViewController.view];
+    [self presentViewController:pinViewController animated:animated completion:nil];
+}
+
+#pragma mark - User Interaction
+
+- (void)login:(id)sender
+{
+    [self showPinViewAnimated:YES];
+}
+
+- (void)logout:(id)sender
+{
+    self.locked = YES;
+}
+
+#pragma mark - THPinViewControllerDelegate
+
+- (NSUInteger)pinLengthForPinViewController:(THPinViewController *)pinViewController
+{
+    return 4;
+}
+
+- (BOOL)pinViewController:(THPinViewController *)pinViewController isPinValid:(NSString *)pin
+{
+    if ([pin isEqualToString:self.correctPin]) {
+        return YES;
+    } else {
+        self.remainingPinEntries--;
+        return NO;
+    }
+}
+
+- (BOOL)userCanRetryInPinViewController:(THPinViewController *)pinViewController
+{
+    return (self.remainingPinEntries > 0);
+}
+
+- (void)incorrectPinEnteredInPinViewController:(THPinViewController *)pinViewController
+{
+    if (self.remainingPinEntries > THNumberOfPinEntries / 2) {
+        return;
+    }
+    
+    UIAlertView *alert =
+    [[UIAlertView alloc] initWithTitle:@"Incorrect PIN"
+                               message:(self.remainingPinEntries == 1 ?
+                                        @"You can try again once." :
+                                        [NSString stringWithFormat:@"You can try again %lu times.",
+                                         (unsigned long)self.remainingPinEntries])
+                              delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    
+}
+
+- (void)pinViewControllerWillDismissAfterPinEntryWasSuccessful:(THPinViewController *)pinViewController
+{
+    self.locked = NO;
+    
+}
+
+- (void)pinViewControllerWillDismissAfterPinEntryWasUnsuccessful:(THPinViewController *)pinViewController
+{
+    self.locked = YES;
+}
+
+- (void)pinViewControllerWillDismissAfterPinEntryWasCancelled:(THPinViewController *)pinViewController
+{
+
+}
+
 @end

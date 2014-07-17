@@ -62,21 +62,11 @@ static const NSUInteger THNumberOfPinEntries = 6;
     //密码部分
     self.correctPin = @"1111";
     
-//    self.secretContentView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"confidential"]];
-//    self.secretContentView.translatesAutoresizingMaskIntoConstraints = NO;
-//    self.secretContentView.contentMode = UIViewContentModeScaleAspectFit;
-//    [self.view addSubview:self.secretContentView];
-//    
-//    NSDictionary *views = @{ @"secretContentView" : self.secretContentView };
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(20)-[secretContentView]-(20)-|"
-//                                                                      options:0 metrics:nil views:views]];
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(120)-[secretContentView]-(20)-|"
-//                                                                      options:0 metrics:nil views:views]];
+
     self.locked = YES;
     
     NSTimer *time = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(login:) userInfo:nil repeats:NO];
-//    time = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:0.1 target:self selector:@selector(login:) userInfo:nil repeats:NO];
-//    [time fire];
+
 }
 
 #pragma mark 即将旋转屏幕的时候自动调用
@@ -87,7 +77,8 @@ static const NSUInteger THNumberOfPinEntries = 6;
         [_dock rotateToOrientation:toInterfaceOrientation];
         
         // 调整当前选中控制器view的frame
-        CGFloat width = 768 - kDockMenuItemHeight;
+//        CGFloat width = 768 - kDockMenuItemHeight;
+        CGFloat width = 1024 - 270;
         _currentChild.view.frame = CGRectMake(_dock.frame.size.width, 0, width, _dock.frame.size.height);
     }];
 }
@@ -138,7 +129,8 @@ static const NSUInteger THNumberOfPinEntries = 6;
     // 2.移除旧控制器的view
     [_currentChild.view removeFromSuperview];
     
-    CGFloat width = 768 - kDockMenuItemHeight;
+//    CGFloat width = 768 - kDockMenuItemHeight;
+    CGFloat width = 1024 - 270;
     nav.view.frame = CGRectMake(_dock.frame.size.width, 0, width, _dock.frame.size.height);
     [self.view addSubview:nav.view];
     
